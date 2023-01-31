@@ -1,8 +1,13 @@
 export interface RecentEpisode {
-  episodeId: string;
-  animeTitle: string;
-  episodeNum: string;
-  subOrDub: string;
-  animeImg: string;
-  episodeUrl: string;
+  currentPage: number;
+  hasNextPage: boolean;
+  results: Result[];
+}
+
+export interface Result {
+  id: string;
+  image: string;
+  title: string;
+  url: string;
+  episode: number;
 }

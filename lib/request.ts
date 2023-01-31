@@ -23,9 +23,9 @@ class MakeRequests {
    * A sample method to get posts from an API.
    * @returns the posts response.
    */
-  public async getRecentEpisodes(): Promise<RecentEpisode[]> {
-    const jsonResponse: RecentEpisode[] = await this.makeRequest(
-      new Request(`${this.baseURL}recent-release`, {
+  public async getRecentEpisodes(): Promise<RecentEpisode> {
+    const jsonResponse: RecentEpisode = await this.makeRequest(
+      new Request(`${this.baseURL}recent-episodes`, {
         headers: new Headers({ 'Content-Type': 'application/json' }),
       }),
     );
@@ -34,6 +34,6 @@ class MakeRequests {
 }
 
 const makeRequests: MakeRequests = new MakeRequests(
-  'https://gogoanime.consumet.org/',
+  'https://api.consumet.org/anime/zoro/',
 );
 export default makeRequests;
