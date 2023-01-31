@@ -23,7 +23,7 @@ const Card: React.FC<Episode> = ({ episode }) => {
             {episode.title}
           </h2>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-end justify-end">
           <span className="flex items-center whitespace-nowrap rounded-md border border-jacarta-100 py-1 px-2 dark:border-jacarta-600">
             <span data-tippy-content="ETH">
               <svg
