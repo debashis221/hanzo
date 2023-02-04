@@ -1,38 +1,86 @@
-import makeRequests from '@/lib/request';
+'use client';
+
+import { Anime } from '@/lib/api';
 import { SectionTitle, Card } from 'components';
-import { Datum } from 'interfaces/interfaces';
+import { Datum, TopAnime } from 'interfaces/interfaces';
 import Image from 'next/image';
-const TopAiring = async () => {
-  let pageNumber = 1;
-  const topAiring = await makeRequests.getTopAiring({
-    filter: 'airing',
-    page: pageNumber,
-  });
+import { useState, useEffect } from 'react';
+
+const TopAiring = () => {
+  const [pageNumber, setPageNumber] = useState(1);
+  const [topAiring, setTopAiring] = useState<TopAnime>();
+  const getTopAiring = async () => {
+    const topAiringData = await Anime.getTopAiring({
+      filter: 'airing',
+      page: pageNumber,
+    });
+    setTopAiring(topAiringData);
+  };
+  useEffect(() => {
+    getTopAiring();
+    return () => {};
+  }, [pageNumber]);
 
   const nextPage = async () => {
-    if (pageNumber !== topAiring.pagination.items.total) {
-      pageNumber += 1;
+    if (pageNumber !== topAiring?.pagination.items.total) {
+      setPageNumber(pageNumber + 1);
     }
   };
-
+  const prevPage = async () => {
+    if (pageNumber !== 1) {
+      setPageNumber(pageNumber - 1);
+    }
+  };
+  if (!topAiring) return null;
   return (
     <div className="flex">
       <div>
         <SectionTitle title="Top Airing Anime" />
         <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5">
-          {topAiring.data.map((episode: Datum) => {
+          {topAiring?.data.map((episode: Datum) => {
             return <Card episode={episode} key={episode.mal_id} />;
           })}
         </div>
         <div className="flex items-center justify-center py-5 px-5">
-          <button className="border-black btn-primary btn mr-5 border">
-            Previous
+          <button
+            className="border-black btn-primary btn mr-5 border"
+            onClick={() => prevPage()}
+            disabled={pageNumber === 1}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
           </button>
           <button
             className="border-black btn-primary btn border"
-            // onClick={() => nextPage()}
+            onClick={() => nextPage()}
+            disabled={pageNumber === topAiring?.pagination.items.total}
           >
-            Next
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
           </button>
         </div>
       </div>

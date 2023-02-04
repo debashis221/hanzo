@@ -13,8 +13,8 @@ const Card: React.FC<Episode> = ({ episode }) => {
           src={episode.images.webp.large_image_url}
           alt={episode.title}
           width={330}
-          height={300}
-          className="max-h-[180px] rounded-[0.625rem] lg:max-h-[220px]"
+          height={330}
+          className="max-h-[180px] min-h-[180px] rounded-[0.625rem] lg:max-h-[250px] lg:min-h-[250px]"
           loading="lazy"
         />
 

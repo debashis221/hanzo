@@ -1,10 +1,14 @@
-import makeRequests from '@/lib/request';
 import { Datum } from 'interfaces/interfaces';
 import { Card, SectionTitle } from 'components';
+import { Anime } from '@/lib/api';
 
 export default async function Page() {
-  const topAiring = await makeRequests.getTopAiring({
+  const topAiring = await Anime.getTopAiring({
     filter: 'airing',
+    page: 1,
+  });
+  const popularAnime = await Anime.getPopularAnime({
+    filter: 'bypopularity',
     page: 1,
   });
   if (!topAiring) return null;
@@ -20,6 +24,12 @@ export default async function Page() {
       <SectionTitle title="Top Airing Anime" href="/top-airing" />
       <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6">
         {topAiring.data.slice(0, 12).map((episode: Datum) => {
+          return <Card episode={episode} key={episode.mal_id} />;
+        })}
+      </div>
+      <SectionTitle title="Popular Anime" href="/popular" />
+      <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6">
+        {popularAnime.data.slice(0, 12).map((episode: Datum) => {
           return <Card episode={episode} key={episode.mal_id} />;
         })}
       </div>
