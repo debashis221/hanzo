@@ -1,5 +1,9 @@
-import { RecentEpisode } from 'interfaces/interfaces';
+import { TopAnime } from 'interfaces/interfaces';
 
+interface TopAiringInterface {
+  filter: string;
+  page: number;
+}
 class MakeRequests {
   private baseURL: string;
 
@@ -18,14 +22,12 @@ class MakeRequests {
       .then((json: T) => json);
     return jsonResponse;
   }
-
-  /**
-   * A sample method to get posts from an API.
-   * @returns the posts response.
-   */
-  public async getRecentEpisodes(): Promise<RecentEpisode> {
-    const jsonResponse: RecentEpisode = await this.makeRequest(
-      new Request(`${this.baseURL}recent-episodes`, {
+  public async getTopAiring({
+    filter,
+    page,
+  }: TopAiringInterface): Promise<TopAnime> {
+    const jsonResponse: TopAnime = await this.makeRequest(
+      new Request(`${this.baseURL}top/anime?filter=${filter}&page=${page}`, {
         headers: new Headers({ 'Content-Type': 'application/json' }),
       }),
     );
@@ -34,6 +36,6 @@ class MakeRequests {
 }
 
 const makeRequests: MakeRequests = new MakeRequests(
-  'https://api.consumet.org/anime/zoro/',
+  'https://api.jikan.moe/v4/',
 );
 export default makeRequests;
