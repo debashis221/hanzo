@@ -1,4 +1,5 @@
 import Card from './Card';
 import SectionTitle from './SectionTitle';
+import SkeletonCard from './SkeletonCard';
 
-export { Card, SectionTitle };
+export { Card, SectionTitle,SkeletonCard };

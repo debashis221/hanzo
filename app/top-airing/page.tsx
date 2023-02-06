@@ -1,5 +1,5 @@
 'use client';
-import { SectionTitle, Card } from 'components';
+import { SectionTitle, Card, SkeletonCard } from 'components';
 import { Datum } from 'interfaces/interfaces';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -33,7 +33,7 @@ const TopAiring = () => {
           {isLoading ? (
             <>
               {tempArray.map((item, index) => {
-                return <Card loading key={index} />;
+                return <SkeletonCard key={index} />;
               })}
             </>
           ) : (
