@@ -1,7 +1,7 @@
 'use client';
+
 import { Datum } from 'interfaces/interfaces';
 import { Card, SectionTitle } from 'components';
-import { Anime } from '@/lib/api';
 import axios from 'axios';
 import useSwr from 'swr';
 

@@ -7,7 +7,7 @@ interface Episode {
 }
 const Card: React.FC<Episode> = ({ episode }) => {
   return (
-    <Link href={`/anime/${episode.title_english}`}>
+    <Link href={`/anime/${episode.mal_id}`}>
       <div className="border-black block max-h-[320px] min-h-[200px] rounded-2.5xl border bg-jacarta-700 p-[1.1875rem] transition-shadow hover:shadow-lg">
         <Image
           src={episode.images.webp.large_image_url}
