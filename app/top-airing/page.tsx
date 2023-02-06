@@ -1,28 +1,21 @@
 'use client';
-
-import { Anime } from '@/lib/api';
 import { SectionTitle, Card } from 'components';
-import { Datum, TopAnime } from 'interfaces/interfaces';
+import { Datum } from 'interfaces/interfaces';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import useSwr from 'swr';
+import axios from 'axios';
 
 const TopAiring = () => {
   const [pageNumber, setPageNumber] = useState(1);
-  const [topAiring, setTopAiring] = useState<TopAnime>();
-  const getTopAiring = async () => {
-    const topAiringData = await Anime.getTopAiring({
-      filter: 'airing',
-      page: pageNumber,
-    });
-    setTopAiring(topAiringData);
-  };
-  useEffect(() => {
-    getTopAiring();
-    return () => {};
-  }, [pageNumber]);
-
+  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const { data, isLoading, error } = useSwr(
+    `${process.env.NEXT_PUBLIC_API_URL}/top/anime?filter=airing&page=${pageNumber}`,
+    fetcher,
+  );
+  const tempArray = Array.from({ length: 25 });
   const nextPage = async () => {
-    if (pageNumber !== topAiring?.pagination.items.total) {
+    if (pageNumber !== data?.pagination.items.total) {
       setPageNumber(pageNumber + 1);
     }
   };
@@ -31,15 +24,25 @@ const TopAiring = () => {
       setPageNumber(pageNumber - 1);
     }
   };
-  if (!topAiring) return null;
+  if (error) return null;
   return (
     <div className="flex">
       <div>
         <SectionTitle title="Top Airing Anime" />
-        <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5">
-          {topAiring?.data.map((episode: Datum) => {
-            return <Card episode={episode} key={episode.mal_id} />;
-          })}
+        <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:w-[80vw]">
+          {isLoading ? (
+            <>
+              {tempArray.map((item, index) => {
+                return <Card loading key={index} />;
+              })}
+            </>
+          ) : (
+            <>
+              {data?.data.map((episode: Datum) => {
+                return <Card episode={episode} key={episode.mal_id} />;
+              })}
+            </>
+          )}
         </div>
         <div className="flex items-center justify-center py-5 px-5">
           <button
@@ -65,7 +68,7 @@ const TopAiring = () => {
           <button
             className="border-black btn-primary btn border"
             onClick={() => nextPage()}
-            disabled={pageNumber === topAiring?.pagination.items.total}
+            disabled={pageNumber === data?.pagination.items.total}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
