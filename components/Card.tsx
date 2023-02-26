@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Datum } from '../interfaces/interfaces';
+import { Datum, Entry } from '../interfaces/interfaces';
 
 interface Episode {
-  episode: Datum;
+  episode: Datum | Entry;
 }
 const Card: React.FC<Episode> = ({ episode }) => {
   return (
