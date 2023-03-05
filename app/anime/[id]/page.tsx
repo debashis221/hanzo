@@ -1,5 +1,6 @@
 'use client';
 import Card from '@/components/Card';
+import Header from '@/components/Header';
 import Loading from '@/components/loading';
 import axios from 'axios';
 import { Datum, RecommendedData } from 'interfaces/interfaces';
@@ -47,6 +48,7 @@ const Anime = ({ params }: Props) => {
 
   return (
     <>
+      <Header />
       <div className="mx-5 grid items-center justify-between gap-5 lg:flex">
         <div className="border-black w-[40vw] min-w-[15vw] rounded-2.5xl border bg-jacarta-700 p-[0.85rem] transition-shadow hover:shadow-lg lg:w-[15vw]">
           <Image

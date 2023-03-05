@@ -10,6 +10,7 @@ const nextConfig = {
       'www.crunchyroll.com',
       'cdn.myanimelist.net',
       'i0.wp.com',
+      'zoro.to',
     ],
   },
   experimental: {

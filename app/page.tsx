@@ -1,7 +1,7 @@
 'use client';
 
 import { Datum } from 'interfaces/interfaces';
-import { Card, Loading, SectionTitle } from 'components';
+import { Card, Header, Loading, SectionTitle } from 'components';
 import axios from 'axios';
 import useSwr from 'swr';
 
@@ -22,19 +22,22 @@ export default function Page() {
 
   if (isLoading) return <Loading />;
   return (
-    <main className="flex flex-col overflow-x-hidden">
-      <SectionTitle title="Top Airing Anime" href="/top-airing" />
-      <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6">
-        {topAiring?.data.slice(0, 12).map((episode: Datum) => {
-          return <Card episode={episode} key={episode.mal_id} />;
-        })}
-      </div>
-      <SectionTitle title="Popular Anime" href="/popular" />
-      <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6">
-        {popularAnime?.data.slice(0, 12).map((episode: Datum) => {
-          return <Card episode={episode} key={episode.mal_id} />;
-        })}
-      </div>
-    </main>
+    <>
+      <Header />
+      <main className="flex flex-col overflow-x-hidden">
+        <SectionTitle title="Top Airing Anime" href="/top-airing" />
+        <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6">
+          {topAiring?.data.slice(0, 12).map((episode: Datum) => {
+            return <Card episode={episode} key={episode.mal_id} />;
+          })}
+        </div>
+        <SectionTitle title="Popular Anime" href="/popular" />
+        <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6">
+          {popularAnime?.data.slice(0, 12).map((episode: Datum) => {
+            return <Card episode={episode} key={episode.mal_id} />;
+          })}
+        </div>
+      </main>
+    </>
   );
 }

@@ -13,7 +13,9 @@ export default function RootLayout({
       <head>
         <title>Hanzo - Watch anime free anytime </title>
       </head>
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        <>{children}</>
+      </body>
     </html>
   );
 }
