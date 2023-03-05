@@ -1,13 +1,10 @@
 'use client';
-
 import { Datum } from 'interfaces/interfaces';
 import { Card, Header, Loading, SectionTitle } from 'components';
-import { useState } from 'react';
 import axios from 'axios';
 import useSwr from 'swr';
 
 export default function Page() {
-  const [scroll, setScroll] = useState(0);
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const {
     data: topAiring,
@@ -25,7 +22,6 @@ export default function Page() {
   if (isLoading) return <Loading />;
   return (
     <>
-
       <Header />
       <main className="flex flex-col overflow-x-hidden">
         <SectionTitle title="Top Airing Anime" href="/top-airing" />
