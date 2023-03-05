@@ -1,7 +1,6 @@
-'use client';
+'use client';;
 import { SectionTitle, Card, Loading, Header } from 'components';
 import { Datum } from 'interfaces/interfaces';
-import Image from 'next/image';
 import { useState } from 'react';
 import useSwr from 'swr';
 import axios from 'axios';
