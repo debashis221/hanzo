@@ -1,6 +1,8 @@
+import React from 'react';
+
 const Loading = () => {
   return (
-    <div className="flex h-[100vh] items-center justify-center">
+    <div className="flex items-center justify-center h-[100vh]">
       <div className="loader">
         <svg viewBox="0 0 80 80">
           <circle id="test" cx={40} cy={40} r={32} />

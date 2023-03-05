@@ -1,7 +1,7 @@
 'use client';
 
 import { Datum } from 'interfaces/interfaces';
-import { Card, SectionTitle } from 'components';
+import { Card, Loading, SectionTitle } from 'components';
 import axios from 'axios';
 import useSwr from 'swr';
 
@@ -20,9 +20,9 @@ export default function Page() {
     fetcher,
   );
 
-if(isLoading) return <>Loading</>
+  if (isLoading) return <Loading />;
   return (
-    <div className="flex flex-col">
+    <main className="flex flex-col overflow-x-hidden">
       <SectionTitle title="Top Airing Anime" href="/top-airing" />
       <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6">
         {topAiring?.data.slice(0, 12).map((episode: Datum) => {
@@ -35,6 +35,6 @@ if(isLoading) return <>Loading</>
           return <Card episode={episode} key={episode.mal_id} />;
         })}
       </div>
-    </div>
+    </main>
   );
 }

@@ -1,5 +1,5 @@
 'use client';
-import { SectionTitle, Card, SkeletonCard } from 'components';
+import { SectionTitle, Card, Loading } from 'components';
 import { Datum } from 'interfaces/interfaces';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -13,7 +13,6 @@ const TopAiring = () => {
     `${process.env.NEXT_PUBLIC_API_URL}/top/anime?filter=airing&page=${pageNumber}`,
     fetcher,
   );
-  const tempArray = Array.from({ length: 25 });
   const nextPage = async () => {
     if (pageNumber !== data?.pagination.items.total) {
       setPageNumber(pageNumber + 1);
@@ -25,24 +24,15 @@ const TopAiring = () => {
     }
   };
   if (error) return null;
+  if (isLoading) return <Loading />;
   return (
     <div className="flex">
       <div>
         <SectionTitle title="Top Airing Anime" />
-        <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 xl:w-[80vw]">
-          {isLoading ? (
-            <>
-              {tempArray.map((item, index) => {
-                return <SkeletonCard key={index} />;
-              })}
-            </>
-          ) : (
-            <>
-              {data?.data.map((episode: Datum) => {
-                return <Card episode={episode} key={episode.mal_id} />;
-              })}
-            </>
-          )}
+        <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+          {data?.data.map((episode: Datum) => {
+            return <Card episode={episode} key={episode.mal_id} />;
+          })}
         </div>
         <div className="flex items-center justify-center py-5 px-5">
           <button
@@ -86,18 +76,6 @@ const TopAiring = () => {
             </svg>
           </button>
         </div>
-      </div>
-      <div className="border-black mt-[90px] hidden min-h-[200px] rounded-2.5xl border bg-jacarta-700 p-[0.9rem] text-center transition-shadow hover:shadow-lg lg:block">
-        <h4 className="text-lg">Advertisement</h4>
-        <Image
-          src={
-            'https://i0.wp.com/salifex.com/wp-content/uploads/2019/02/heinz_ketchup_2.jpg?fit=660%2C900&ssl=1'
-          }
-          className="rounded-xl"
-          width={660}
-          height={900}
-          alt="advertisement"
-        />
       </div>
     </div>
   );
