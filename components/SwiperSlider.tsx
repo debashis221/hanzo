@@ -31,7 +31,7 @@ const SwiperSlider = ({ data }: { data: FavouriteList }) => {
                     alt={item.title}
                     width={1800}
                     height={50}
-                    className="max-h-[63vh] rounded-lg object-cover blur-sm"
+                    className="max-h-[63vh] rounded-lg object-fit blur-sm opacity-90"
                     priority
                   />
                   <div className="absolute bottom-10 left-[30%] hidden max-w-[40vw] rounded-md border border-primary bg-primary bg-opacity-30 bg-clip-padding py-2 text-center backdrop-blur-lg backdrop-filter lg:flex lg:flex-col">
