@@ -27,11 +27,11 @@ const SwiperSlider = ({ data }: { data: FavouriteList }) => {
                   className="border-black relative block flex max-h-[70vh] items-center justify-center rounded-2.5xl border bg-jacarta-700 p-[1.1875rem] transition-shadow hover:shadow-lg lg:min-h-[70vh] "
                 >
                   <Image
-                    src={item.trailer.images.maximum_image_url || ''}
+                    src={item.trailer.images.large_image_url || ''}
                     alt={item.title}
                     width={1800}
                     height={50}
-                    className="max-h-[63vh] rounded-lg object-fit blur-sm opacity-90"
+                    className="max-h-[63vh] rounded-lg object-cover blur-sm opacity-90"
                     priority
                   />
                   <div className="absolute bottom-10 left-[30%] hidden max-w-[40vw] rounded-md border border-primary bg-primary bg-opacity-30 bg-clip-padding py-2 text-center backdrop-blur-lg backdrop-filter lg:flex lg:flex-col">
