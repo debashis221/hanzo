@@ -1,27 +1,23 @@
 'use client';
+import SwiperCore, { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+
+// Import Swiper styles
+import 'swiper/swiper.min.css';
 import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import { FavouriteList } from 'interfaces/interfaces';
 import Image from 'next/image';
-import { Autoplay, Pagination } from 'swiper';
+SwiperCore.use([Pagination, Autoplay]);
 
 const SwiperSlider = ({ data }: { data: FavouriteList }) => {
   return (
     <div className="my-5 px-5">
       {data && (
         <Swiper
+          spaceBetween={50}
           slidesPerView={1}
-          centeredSlides={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Autoplay, Pagination]}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000 }}
         >
           {data?.data?.map((item, index) => {
             if (item.trailer.images.maximum_image_url !== null)
