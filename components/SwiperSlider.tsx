@@ -1,14 +1,12 @@
 'use client';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import { FavouriteList } from 'interfaces/interfaces';
 import Image from 'next/image';
 
 const SwiperSlider = ({ data }: { data: FavouriteList }) => {
   return (
-    <div className="px-5">
+    <div className="px-5 my-5">
       <Swiper slidesPerView={1}>
         {data?.data?.map((item) => {
           return (
