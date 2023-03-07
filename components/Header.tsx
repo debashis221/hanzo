@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { FaSearch } from 'react-icons/fa';
 
 const Header = () => {
+  let searchText: string;
   const pathname = usePathname();
   const path = pathname?.split('/')[1];
-  console.log(path);
+  const navigate = useRouter();
   return (
     <header className="sticky top-0 z-30 flex w-full items-center justify-around gap-2 bg-accent py-4 shadow-xl sm:px-4">
       <Link href={'/'}>
@@ -69,8 +70,14 @@ const Header = () => {
         <input
           className="mx-2 h-12 rounded-full border px-5 "
           placeholder="Enter any anime name"
+          onChange={(e) => {
+            searchText = e.target.value;
+          }}
         />
-        <button className="btn-primary btn rounded-full border">
+        <button
+          className="btn-primary btn rounded-full border"
+          onClick={() => navigate.push(`/search/${searchText}`)}
+        >
           <FaSearch color="white" size={15} />
         </button>
       </div>
