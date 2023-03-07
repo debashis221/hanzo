@@ -19,7 +19,7 @@ const Card: React.FC<Episode> = ({ episode }) => {
         />
 
         <div className="mt-4 mb-2 flex items-start justify-start">
-          <h2 className="font-display text-base line-clamp-1 hover:text-accent">
+          <h2 className="font-display text-base overflow-ellipsis whitespace-nowrap overflow-hidden hover:text-accent">
             {episode.title}
           </h2>
         </div>
