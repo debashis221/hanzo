@@ -18,17 +18,11 @@ type AnimeData = {
 type RecommendedType = {
   data: RecommendedData[];
 };
-type MoreInfo = {
-  data: {
-    moreinfo: string;
-  };
-};
+
 const Anime = ({ params }: Props) => {
   const fetcher: Fetcher<AnimeData> = (url: string) =>
     axios.get(url).then((res) => res.data);
   const recommendedFetcher: Fetcher<RecommendedType> = (url: string) =>
-    axios.get(url).then((res) => res.data);
-  const moreInfoFetcher: Fetcher<MoreInfo> = (url: string) =>
     axios.get(url).then((res) => res.data);
 
   const { data, isLoading, error } = useSwr(
@@ -39,10 +33,7 @@ const Anime = ({ params }: Props) => {
     `${process.env.NEXT_PUBLIC_API_URL}/anime/${params.id}/recommendations`,
     recommendedFetcher,
   );
-  const { data: moreInfo } = useSwr(
-    `${process.env.NEXT_PUBLIC_API_URL}/anime/${params.id}/moreinfo`,
-    moreInfoFetcher,
-  );
+
   if (isLoading) return <Loading />;
   if (!data) return null;
 
@@ -86,7 +77,7 @@ const Anime = ({ params }: Props) => {
           </div>
 
           <h2 className="text-white">
-            {moreInfo?.data.moreinfo?.slice(0, 300)}
+            {data.data.synopsis.slice(0,410)}...
           </h2>
         </div>
         <div className="flex flex-col items-start justify-start px-5 text-start lg:mx-4"></div>

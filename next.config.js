@@ -11,6 +11,7 @@ const nextConfig = {
       'cdn.myanimelist.net',
       'i0.wp.com',
       'zoro.to',
+      'img.youtube.com'
     ],
   },
   experimental: {
