@@ -49,7 +49,7 @@ const Anime = ({ params }: Props) => {
   return (
     <>
       <Header />
-      <div className="mx-5 grid items-center justify-between gap-5 lg:flex">
+      <div className="mx-5 grid items-center justify-between gap-5 lg:flex my-5">
         <div className="border-black w-[40vw] min-w-[15vw] rounded-2.5xl border bg-jacarta-700 p-[0.85rem] transition-shadow hover:shadow-lg lg:w-[15vw]">
           <Image
             src={data?.data?.images.webp.large_image_url}
