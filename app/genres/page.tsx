@@ -19,7 +19,7 @@ const Genres = () => {
   );
   if (isLoading) return <Loading />;
   return (
-    <div>
+    <div className='overflow-hidden'>
       <Header />
       <SectionTitle title="Genres" />
       <div className="my-6 mx-5 grid grid-cols-5 gap-4">

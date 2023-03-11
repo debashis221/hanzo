@@ -5,6 +5,7 @@ import Loading from '@/components/loading';
 import axios from 'axios';
 import { Datum, RecommendedData } from 'interfaces/interfaces';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import useSwr, { Fetcher } from 'swr';
 
 type Props = {
@@ -20,6 +21,7 @@ type RecommendedType = {
 };
 
 const Anime = ({ params }: Props) => {
+  const navigate = useRouter();
   const fetcher: Fetcher<AnimeData> = (url: string) =>
     axios.get(url).then((res) => res.data);
   const recommendedFetcher: Fetcher<RecommendedType> = (url: string) =>
@@ -40,7 +42,7 @@ const Anime = ({ params }: Props) => {
   return (
     <>
       <Header />
-      <div className="mx-5 grid items-center justify-between gap-5 lg:flex my-5">
+      <div className="mx-5 my-5 grid items-center justify-between gap-5 lg:flex">
         <div className="border-black w-[40vw] min-w-[15vw] rounded-2.5xl border bg-jacarta-700 p-[0.85rem] transition-shadow hover:shadow-lg lg:w-[15vw]">
           <Image
             src={data?.data?.images.webp.large_image_url}
@@ -68,7 +70,10 @@ const Anime = ({ params }: Props) => {
             </h2>
           </div>
           <div className="flex gap-2">
-            <button className="btn-primary btn my-3 rounded-full">
+            <button
+              className="btn-primary btn my-3 rounded-full"
+              onClick={() => navigate.push(`/anime/${params.id}/watch`)}
+            >
               Watch Now
             </button>
             <button className="btn-primary btn my-3 rounded-full">
@@ -76,9 +81,7 @@ const Anime = ({ params }: Props) => {
             </button>
           </div>
 
-          <h2 className="text-white">
-            {data.data.synopsis.slice(0,410)}...
-          </h2>
+          <h2 className="text-white">{data.data.synopsis.slice(0, 410)}...</h2>
         </div>
         <div className="flex flex-col items-start justify-start px-5 text-start lg:mx-4"></div>
         <div className="flex flex-col items-start justify-start px-5 text-start lg:mx-4"></div>

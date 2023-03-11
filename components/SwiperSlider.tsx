@@ -24,31 +24,31 @@ const SwiperSlider = ({ data }: { data: FavouriteList }) => {
               return (
                 <SwiperSlide
                   key={index}
-                  className="border-black relative block flex max-h-[70vh] items-center justify-center rounded-2.5xl border bg-jacarta-700 p-[1.1875rem] transition-shadow hover:shadow-lg lg:min-h-[70vh] "
+                  className="border-black relative flex max-h-[70vh] items-center justify-center rounded-2.5xl border bg-jacarta-700 p-[1.1875rem] transition-shadow hover:shadow-lg lg:min-h-[70vh] "
                 >
                   <Image
                     src={item.trailer.images.large_image_url || ''}
                     alt={item.title}
                     width={1800}
                     height={50}
-                    className="max-h-[63vh] rounded-lg object-cover blur-sm opacity-90"
+                    className="max-h-[63vh] rounded-2xl object-fill"
                     priority
                   />
-                  <div className="absolute bottom-10 left-[30%] hidden max-w-[40vw] rounded-md border border-primary bg-primary bg-opacity-30 bg-clip-padding py-2 text-center backdrop-blur-lg backdrop-filter lg:flex lg:flex-col">
-                    <h2 className="px-5  text-2xl font-bold text-white">
+                  <div className="absolute bottom-10 lg:left-[2%] lg:max-w-[40vw] lg:flex lg:flex-col">
+                    <h2 className="px-5 lg:text-2xl font-bold text-white">
                       {item.title_english}
                     </h2>
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-start justify-start px-5">
                       <h2 className="text-base font-bold text-white">
                         {item.type}
                       </h2>
-                      <span className="mx-2 text-2xl font-bold text-white">
+                      <span className="mx-2 lg:text-2xl font-bold text-white">
                         .
                       </span>
                       <h2 className="text-base font-bold text-white">
                         EP {item.episodes}
                       </h2>
-                      <span className="mx-2 text-2xl font-bold text-white">
+                      <span className="mx-2 lg:text-2xl font-bold text-white">
                         .
                       </span>
                       <h2 className="text-base font-bold text-white">
@@ -58,7 +58,7 @@ const SwiperSlider = ({ data }: { data: FavouriteList }) => {
                     <p className="hidden px-5 text-white lg:flex">
                       {item.synopsis.slice(0, 200)}
                     </p>
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex items-start justify-start gap-2 px-5">
                       <button className="btn-primary btn my-3 rounded-full">
                         Watch Now
                       </button>

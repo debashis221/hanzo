@@ -8,7 +8,7 @@ interface Episode {
 const Card: React.FC<Episode> = ({ episode }) => {
   return (
     <Link href={`/anime/${episode.mal_id}`}>
-      <div className="border-black block max-h-[320px] min-h-[200px] rounded-2.5xl border bg-jacarta-700 p-[1.1875rem] transition-shadow hover:shadow-lg">
+      <div className="shadow-xl border-black block max-h-[320px] min-h-[200px] rounded-2.5xl border bg-jacarta-700 p-[1.1875rem] transition-shadow hover:shadow-lg">
         <Image
           src={episode.images.webp.large_image_url}
           alt={episode.title}
@@ -19,7 +19,7 @@ const Card: React.FC<Episode> = ({ episode }) => {
         />
 
         <div className="mt-4 mb-2 flex items-start justify-start">
-          <h2 className="font-display text-base overflow-ellipsis whitespace-nowrap overflow-hidden hover:text-accent">
+          <h2 className="font-display text-white text-base overflow-ellipsis whitespace-nowrap overflow-hidden hover:text-accent">
             {episode.title}
           </h2>
         </div>

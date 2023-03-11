@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  box-sizing: border-box;
+}
+
 body::-webkit-scrollbar {
   width: 0.4em;
 }
@@ -17,7 +21,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .loader {
-  --path: #fce38a;
+  --path: #B1B2FF;
   --dot: #95e1d3;
   --duration: 3s;
   width: 44px;
