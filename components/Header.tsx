@@ -69,6 +69,7 @@ const Header = () => {
       <div className="hidden lg:flex">
         <input
           className="mx-2 h-12 rounded-full border px-5 "
+          type="search"
           placeholder="Enter any anime name"
           onChange={(e) => {
             searchText = e.target.value;

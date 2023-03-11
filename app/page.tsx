@@ -6,11 +6,7 @@ import useSwr from 'swr';
 
 export default function Page() {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-  const {
-    data: topAiring,
-    isLoading,
-    error,
-  } = useSwr(
+  const { data: topAiring, isLoading } = useSwr(
     `${process.env.NEXT_PUBLIC_API_URL}/top/anime?filter=airing&page=1`,
     fetcher,
   );
@@ -28,7 +24,7 @@ export default function Page() {
     <>
       <Header />
       <main className="flex flex-col overflow-x-hidden">
-        <SwiperSlider data={favouriteAnime}/>
+        <SwiperSlider data={favouriteAnime} />
         <SectionTitle title="Top Airing Anime" href="/top-airing" />
         <div className="mx-4 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {topAiring?.data.slice(0, 12).map((episode: Datum) => {
